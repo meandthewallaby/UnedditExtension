@@ -1,0 +1,28 @@
+{
+    "name": "Uneddit Reddit",
+    "version": "0.1",
+    "manifest_version": 2,
+    "description": "Uneddit Reddit - Easily undelete and unedit comments on Reddit",
+    "icons": {
+	"48": "icon48.png",
+	"128": "icon128.png"
+    },
+    "content_scripts": [{ 
+	"js": [
+	    "jquery-1.8.3.min.js", 
+	    "snuownd.js",
+	    "uneddit.js"
+	],
+	"matches" : [
+	    "http://reddit.com/*",
+	    "https://reddit.com/*",
+	    "http://*.reddit.com/*",
+	    "https://*.reddit.com/*"
+	] 
+    }
+    ],
+    "permissions": [
+	"tabs",
+	"http://www.unedditreddit.com/"
+    ]
+}
