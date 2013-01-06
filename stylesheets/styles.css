@@ -145,7 +145,7 @@ img {
   margin: 0 auto;
   max-width: 650px;
   padding: 5px;
-  margin: 10px 0 32px 0;
+  margin: 0;
 }
 
 
@@ -245,6 +245,10 @@ a.header {
 
 a.name {
 	white-space: nowrap;
+}
+
+img.header {
+    align: center;
 }
 
 header ul {
