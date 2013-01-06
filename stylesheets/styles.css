@@ -248,7 +248,8 @@ a.name {
 }
 
 img.header {
-    align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 header ul {
