@@ -2,6 +2,7 @@
 layout: post
 title: Version 0.2 Released
 ---
+
 **Security Fix and Auto-Updating**
 
 The Uneddit Reddit Extension got a bug fix today, with version 2.0. The issue was with injecting HTML directly from the JSON data returned from [Uneddit Reddit](http://unedditreddit.com).
