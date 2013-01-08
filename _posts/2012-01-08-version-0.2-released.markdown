@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Version 0.2 Released
-permalink: /UnedditExtension/:year/:month/:day/:title/
+permalink: /UnedditExtension/2013/01/08/version-0.2-released/
 ---
 **Security Fix and Auto-Updating**
 
