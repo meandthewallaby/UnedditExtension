@@ -15,3 +15,13 @@ at writing a Chrome extension. So, here it is.
 </p><p>
 To install, simply click the download link to the left, or <a href="package/UnedditExtension.crx">here</a>, open a tab to <code>chrome://extensions</code>, and drag it from your download bar onto the Extensions page.
 </p>
+<h3>News</h3>
+{% for post in paginator.posts %}
+<h4><a href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></h4>
+<div class="post_content">
+{{ post.content | truncatewords: 50 }}
+<a href="{{ post.url }}">read more</a>
+</div><div class="by-line">
+<span>Posted {{ post.date | date: "%A, %B %d, %Y" }}</span>
+</div><div class="rule"><hr/></div>
+{% endfor %}
