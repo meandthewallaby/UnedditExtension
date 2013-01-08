@@ -1,4 +1,3 @@
 paginate: 10
 pygments: true
 markdown: rdiscount
-permalink: /UnedditExtension/:year/:month/:day/:title/
