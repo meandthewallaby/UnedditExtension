@@ -4,6 +4,7 @@
     "manifest_version": 2,
     "description": "Uneddit Reddit - Easily undelete and unedit comments on Reddit",
     "homepage_url": "http://meandthewallaby.github.com/UnedditExtension/",
+    "update_url": "http://meandthewallaby.github.com/UnedditExtension/update.xml",
     "icons": {
 	"48": "icon48.png",
 	"128": "icon128.png"
