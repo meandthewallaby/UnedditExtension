@@ -17,11 +17,12 @@ function undelete(formId, contentId, authorName, contentHtml)
 {
     var form = $("#"+formId);
     form.removeClass('grayed');
-    form.parent().find(".tagline>em").html( 
-	"<a href='http://www.reddit.com/user/" +
-	authorName + 
-	"' class='author id-" + contentId + "'>" + 
-	authorName + "</a>");
+    form.parent().find(".tagline>em").replaceWith(
+	$("<a></a>")
+	.attr("href", "http://reddit.com/user/"+authorName)
+	.addClass("author").addClass("id-"+contentId)
+	.text(authorName)
+    );
 
     form.find(".md").html(contentHtml);
 
