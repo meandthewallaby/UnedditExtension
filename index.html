@@ -17,7 +17,7 @@ To install, simply click the download link to the left, or <a href="package/Uned
 </p>
 <h3>News</h3>
 {% for post in paginator.posts %}
-<h4><a base="{{ site.baseurl }}" href="{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></h4>
+<h4><a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}" rel="bookmark">{{ post.title }}</a></h4>
 <div class="post_content">
 {{ post.content | truncatewords: 50 }}
 <a href="{{ post.url }}">read more</a>
