@@ -1,7 +1,8 @@
 ---
-layout: post
+layout: default
 title: Version 0.2 Released
 ---
+### {{ page.title }} ###
 
 **Security Fix and Auto-Updating**
 
