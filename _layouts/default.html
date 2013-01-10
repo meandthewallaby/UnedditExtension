@@ -9,11 +9,18 @@
 
     <link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/styles.css">
     <link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/pygment_trac.css">
+    <script src="{{ site.baseurl }}/javascripts/jquery-1.8.3.min.js"></script>
     <script src="{{ site.baseurl }}/javascripts/scale.fix.js"></script>
     <script type="text/javascript">
     function installExtension() {
-	chrome.webstore.install("https://chrome.google.com/webstore/detail/akibhpdlinfcelalimeibjcdolmfifel");
+	chrome.webstore.install();
     }
+
+    $("document").ready(function() {
+	if(chrome.app.isInstalled) {
+	    $("a.add-chrome").parent().hide();
+	}
+    });
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
