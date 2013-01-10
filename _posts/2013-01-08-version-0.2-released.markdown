@@ -2,7 +2,6 @@
 layout: post
 title: Version 0.2 Released
 ---
-### [{{ page.title }}]({{ site.baseurl }}{{ page.url }}) ###
 
 **Security Fix and Auto-Updating**
 
