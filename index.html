@@ -18,6 +18,7 @@ To install, simply click the <a href="javascript:installExtension();">Add to Chr
 <h2>News</h2>
 {% for post in paginator.posts %}
 <div class="post_content">
+<h3><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
 {{ post.content | truncatewords: 50 }}
 <a href="{{ post.url }}">read more</a>
 </div><div class="by-line">
