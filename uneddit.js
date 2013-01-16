@@ -52,12 +52,11 @@ $(".flat-list:has(a:contains('permalink'))").each(function(index){
     //Deleted forms have the "grayed" class, and the taglines have an "edited-timestamp" class time tag
     if(form.hasClass("grayed") || form.parent().has("time.edited-timestamp").length)
     {
-	permalink.hostname = "www.unedditreddit.com";
 	var deleted = form.hasClass("grayed");
 	var action = deleted ? "undelete" : "unedit";
 	var a = $("<a href='javascript:void(0)' id='" + action + "-" + form.find('input[name="thing_id"]').attr("value") + "'>" + action + "</a>");
 	a.click(function(){
-	    callUneddit(permalink.href, form.attr("id"), deleted);
+	    callUneddit(permalink.href.replace(/\/\/[^\/]*\.reddit\.com\//, '//www.unedditreddit.com\/') , form.attr("id"), deleted);
 	});
 	$(this).append($("<li></li>").append(a));
     }
