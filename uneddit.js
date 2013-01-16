@@ -37,7 +37,7 @@ function toggleEdit(formId, contentId, newCommentHtml) {
     comment.html(newCommentHtml);
 
     var link = $("#unedit-"+contentId);
-    link.text(link.text() == "unedit" ? "re-edit" : "unedit");
+    link.text(link.text() === "unedit" || link.text() === "unediting..." ? "re-edit" : "unedit");
     link.unbind("click");
     link.click(function() {
 	toggleEdit(formId, contentId, oldCommentHtml);
@@ -56,6 +56,7 @@ $(".flat-list:has(a:contains('permalink'))").each(function(index){
 	var action = deleted ? "undelete" : "unedit";
 	var a = $("<a href='javascript:void(0)' id='" + action + "-" + form.find('input[name="thing_id"]').attr("value") + "'>" + action + "</a>");
 	a.click(function(){
+	    a.text(deleted ? "undeleting..." : "unediting...");
 	    callUneddit(permalink.href.replace(/\/\/[^\/]*\.reddit\.com\//, '//www.unedditreddit.com\/') , form.attr("id"), deleted);
 	});
 	$(this).append($("<li></li>").append(a));
