@@ -1,16 +1,44 @@
 function callUneddit(commentHref, formId, deleted)
 {
-    $.getJSON(commentHref, function(content) {
-	if(content != null)
-	{
-	    var contentHtml = $("<p></p>").html(SnuOwnd.getParser().render(content.content));
-	    if(deleted) {
-		undelete(formId, content.name, content.author, contentHtml.html());
-	    } else {
-		toggleEdit(formId, content.name, contentHtml.html())
+    $.ajax(
+    {
+	url: commentHref,
+	dataType: "json",
+	success: function(content) {
+	    if(content != null)
+	    {
+		var contentHtml = $("<p></p>").html(SnuOwnd.getParser().render(content.content));
+		if(deleted) {
+		    undelete(formId, content.name, content.author, contentHtml.html());
+		} else {
+		    toggleEdit(formId, content.name, contentHtml.html())
+		}
 	    }
+	    else
+	    {
+		nullResponse(formId);
+	    }
+	},
+	error: function(e, status, message) {
+	    if(message == null || message == "")
+	    {
+		message = "Host not found.";
+	    }
+	    unedditError(formId, message);
 	}
     });
+}
+
+function nullResponse(formId)
+{
+    var form = $("#"+formId);
+    form.find(".md").text("UnedditReddit could not find this comment");
+}
+
+function unedditError(formId, message)
+{
+    var form = $("#"+formId);
+    form.find(".md").text("UnedditReddit encountered an error: " + message);
 }
 
 function undelete(formId, contentId, authorName, contentHtml)
@@ -53,11 +81,13 @@ $(".flat-list:has(a:contains('permalink'))").each(function(index){
     if(form.hasClass("grayed") || form.parent().has("time.edited-timestamp").length)
     {
 	permalink.hostname = "www.unedditreddit.com";
+	var unedditHref = permalink.href;
+	permalink.hostname = "www.reddit.com";
 	var deleted = form.hasClass("grayed");
 	var action = deleted ? "undelete" : "unedit";
 	var a = $("<a href='javascript:void(0)' id='" + action + "-" + form.find('input[name="thing_id"]').attr("value") + "'>" + action + "</a>");
 	a.click(function(){
-	    callUneddit(permalink.href, form.attr("id"), deleted);
+	    callUneddit(unedditHref, form.attr("id"), deleted);
 	});
 	$(this).append($("<li></li>").append(a));
     }
