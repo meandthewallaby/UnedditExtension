@@ -1,0 +1,7 @@
+---
+layout: post
+title: Version 0.4 Released: Feedback
+---
+Just wanted to let you all know that the Uneddit Reddit extension has just hit version 0.4. You can get it in the [Chrome Web Store](https://chrome.google.com/webstore/detail/uneddit-reddit/akibhpdlinfcelalimeibjcdolmfifel) or if you already have it installed, through your Extensions page (hit Update Extensions Now).
+
+The big change in this version is just the merging of Zarel's [pull request](https://github.com/Zarel/UnedditExtension/commit/4daa3eb4364aa1201d588ed1a18effa002865427), which I was admittedly WAAAAAAAY too slow to react to. Sorry Zarel!

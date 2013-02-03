@@ -2,6 +2,6 @@
 layout: post
 title: Version 0.3 Released: Error Messages!
 ---
-Just wanted to let you all know that the Uneddit Reddit extension has just hit version 0.3. You can get it in the [Chrome Web Store](https://chrome.google.com/webstore/detail/uneddit-reddit/akibhpdlinfcelalimeibjcdolmfifel/related) or if you already have it installed, through your Extensions page (hit Update Extensions Now).
+Just wanted to let you all know that the Uneddit Reddit extension has just hit version 0.3. You can get it in the [Chrome Web Store](https://chrome.google.com/webstore/detail/uneddit-reddit/akibhpdlinfcelalimeibjcdolmfifel) or if you already have it installed, through your Extensions page (hit Update Extensions Now).
 
 The big change in this version is just the placement of error messages, just to let you know that it tried to find a comment but couldn't.
