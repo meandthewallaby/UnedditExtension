@@ -65,7 +65,7 @@ function toggleEdit(formId, contentId, newCommentHtml) {
     comment.html(newCommentHtml);
 
     var link = $("#unedit-"+contentId);
-    link.text(link.text() == "unedit" ? "re-edit" : "unedit");
+    link.text(link.text() === "unedit" || link.text() === "unediting..." ? "re-edit" : "unedit");
     link.unbind("click");
     link.click(function() {
 	toggleEdit(formId, contentId, oldCommentHtml);
@@ -80,14 +80,16 @@ $(".flat-list:has(a:contains('permalink'))").each(function(index){
     //Deleted forms have the "grayed" class, and the taglines have an "edited-timestamp" class time tag
     if(form.hasClass("grayed") || form.parent().has("time.edited-timestamp").length)
     {
-	permalink.hostname = "www.unedditreddit.com";
-	var unedditHref = permalink.href;
-	permalink.hostname = "www.reddit.com";
 	var deleted = form.hasClass("grayed");
 	var action = deleted ? "undelete" : "unedit";
 	var a = $("<a href='javascript:void(0)' id='" + action + "-" + form.find('input[name="thing_id"]').attr("value") + "'>" + action + "</a>");
 	a.click(function(){
-	    callUneddit(unedditHref, form.attr("id"), deleted);
+	    a.text(deleted ? "undeleting..." : "unediting...");
+	    callUneddit(
+		permalink.href.replace(/\/\/[^\/]*\.reddit\.com\//,
+		    '//www.unedditreddit.com\/'),
+		form.attr("id"), deleted
+	    );
 	});
 	$(this).append($("<li></li>").append(a));
     }
