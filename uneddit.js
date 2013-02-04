@@ -36,12 +36,17 @@ function getContentIdFromFormId(formId)
 
 function unedditError(formId, display, message, deleted)
 {
-    var form = $("#"+formId);
-    form.find(".md").text(display + message);
-    removeLink(getContentIdFromFormId(formId), deleted, "");
+    if(deleted)
+    {
+	var form = $("#"+formId);
+	form.find(".md").text(display + message);
+	removeLink(formId, getContentIdFromFormId(formId), deleted, "");
+    } else {
+	toggleEdit(formId, getContentIdFromFormId(formId), display + message);
+    }
 }
 
-function removeLink(contentId, deleted, oldCommentHtml)
+function removeLink(formId, contentId, deleted, oldCommentHtml)
 {
     if(deleted) {
 	var link = $("#undelete-" + contentId);
@@ -52,7 +57,7 @@ function removeLink(contentId, deleted, oldCommentHtml)
 	link.text(link.text() === "unedit" || link.text() === "unediting..." ? "re-edit" : "unedit");
 	link.unbind("click");
 	link.click(function() {
-	    toggleEdit("form-"+contentId, contentId, oldCommentHtml);
+	    toggleEdit(formId, contentId, oldCommentHtml);
 	});
     }
 }
@@ -70,15 +75,14 @@ function undelete(formId, contentId, authorName, contentHtml)
 
     form.find(".md").html(contentHtml);
 
-    removeLink(contentId, true, "");
+    removeLink(formId, contentId, true, "");
 }
 
 function toggleEdit(formId, contentId, newCommentHtml) {
     var comment = $("#" + formId).find(".md");
     var oldCommentHtml = comment.html();
     comment.html(newCommentHtml);
-
-    removeLink(contentId, false, oldCommentHtml);
+    removeLink(formId, contentId, false, oldCommentHtml);
 }
 
 //Loop through each of the "permalink" links, and act on those--those be comments
