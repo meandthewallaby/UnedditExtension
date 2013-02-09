@@ -1,0 +1,7 @@
+---
+layout: post
+title: Version 0.7 Load More Comments Fixed
+---
+Just wanted to let you all know that the Uneddit Reddit extension has just hit version 0.7. You can get it in the [Chrome Web Store](https://chrome.google.com/webstore/detail/uneddit-reddit/akibhpdlinfcelalimeibjcdolmfifel) or if you already have it installed, through your Extensions page (hit Update Extensions Now).
+
+This version fixes the issue where it would not let you undelete comments that were loaded through the "load more comments" link.
