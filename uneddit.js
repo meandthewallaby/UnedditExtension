@@ -85,26 +85,56 @@ function toggleEdit(formId, contentId, newCommentHtml) {
     removeLink(formId, contentId, false, oldCommentHtml);
 }
 
-//Loop through each of the "permalink" links, and act on those--those be comments
-$(".flat-list:has(a.bylink)").each(function(index){
-    var permalink = $("a.bylink",$(this)).get(0);
-    var form = $("a.bylink",$(this)).parents(".entry").find("form.usertext");
-
-    //Deleted forms have the "grayed" class, and the taglines have an "edited-timestamp" class time tag
-    if(form.hasClass("grayed") || form.parent().has("time.edited-timestamp").length)
-    {
-	var deleted = form.hasClass("grayed");
-	var action = deleted ? "undelete" : "unedit";
-	var a = $("<a href='javascript:void(0)' id='" + action + "-" + form.find('input[name="thing_id"]').attr("value") + "'>" + action + "</a>");
-	a.click(function(){
-	    a.text(deleted ? "undeleting..." : "unediting...");
-	    callUneddit(
-		permalink.href.replace(/\/\/[^\/]*\.reddit\.com\//,
-		    '//www.unedditreddit.com\/'),
-		form.attr("id"), deleted
-	    );
-	});
-	$(this).append($("<li></li>").append(a));
+function createLinks(target)
+{
+    var comments;
+    if(target == null) {
+	comments = $(".flat-list:has(a.bylink)");
+    } else {
+	comments = target.find(".flat-list:has(a.bylink):not(:has(a.uneddit))");
     }
-});
 
+    //Loop through each of the "permalink" links, and act on those--those be comments
+    comments.each(function(index){
+	var permalink = $("a.bylink",$(this)).get(0);
+	var form = $("a.bylink",$(this)).parents(".entry").find("form.usertext");
+
+	//Deleted forms have the "grayed" class, and the taglines have an "edited-timestamp" class time tag
+	if(form.hasClass("grayed") || form.parent().has("time.edited-timestamp").length)
+	{
+	    var deleted = form.hasClass("grayed");
+	    var action = deleted ? "undelete" : "unedit";
+	    var a = $("<a href='javascript:void(0)' id='" + action + "-" + form.find('input[name="thing_id"]').attr("value") + "' class='uneddit'>" + action + "</a>");
+	    a.click(function(){
+		a.text(deleted ? "undeleting..." : "unediting...");
+		callUneddit(
+		    permalink.href.replace(/\/\/[^\/]*\.reddit\.com\//,
+			'//www.unedditreddit.com\/'),
+		    form.attr("id"), deleted
+		);
+	    });
+	    $(this).append($("<li></li>").append(a));
+	}
+    });
+}
+
+$(document).ready(function() {
+    //Create the uneddit links for delete comments
+    createLinks(null);
+
+    //Make a handler for the load more comments click
+    //Find the .morecomments div, and attach DOMNodeInserted event onto its parent .sitetable
+    $("span.morecomments").each(function(index) {
+	$(this).click(function() {
+	    var sitetable = $(this).parents(".sitetable").get(0);
+	    $(sitetable).bind('DOMNodeInserted', function(e) {
+		//this if isn't working
+		if($(e.target).has("a.bylink").length)
+		{
+		    createLinks($(sitetable));
+		}
+	    });
+	});
+    });
+
+});
