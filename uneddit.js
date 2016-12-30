@@ -41,6 +41,7 @@ function unedditError(formId, display, message, deleted)
 	var form = $("#"+formId);
 	form.find(".md").text(display + message);
 	removeLink(formId, getContentIdFromFormId(formId), deleted, "");
+	form.css("display", "block");
     } else {
 	toggleEdit(formId, getContentIdFromFormId(formId), display + message);
     }
@@ -113,7 +114,13 @@ function createLinks(target)
 		    form.attr("id"), deleted
 		);
 	    });
-	    $(this).append($("<li></li>").append(a));
+	    if (form.css("display") == "none") {
+	        var tagline = $("p.tagline", $(this).parent());
+	        tagline.css("display", "inline");
+	        tagline.after(" ", a);
+	    } else {
+	        $(this).append($("<li></li>").append(a));
+	    }
 	}
     });
 }
